@@ -1,0 +1,12 @@
+nav{
+  height: 120px;
+  background-color: #4056A1;
+  color: #FFFFFF;
+  padding: 1.5em;
+  font-size: larger;
+}
+
+nav span{
+  font-family: Bungee;
+
+}

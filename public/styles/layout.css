@@ -18,8 +18,87 @@ body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
+  font-family: 'Source Sans Pro';
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+ header{
+   display: flex;
+   flex-direction: column;
+   color: #FFFFFF;
+   height: 400px;
+   padding: 30px;
+   width: auto;
+   align-items: center;
+   background-color: #00276b;
+   background-image: url("https://www.transparenttextures.com/patterns/binding-light.png");
+ }
+
+ h2{
+  margin: .25em;
+ }
+
+ main{
+   display: flex;
+   margin: 20px 10% 20px 10%;
+   justify-content: center;
+ }
+
+ .container{
+ }
+
+ .new-tweet{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+   align-items: center;
+ }
+
+ .button{
+   font-family: Bungee;
+   background-color: #4056A1;
+   color: #FFFFFF;
+   margin: .25em;
+ }
+
+ .tweet-text{
+   display: flex;
+   border: unset;
+   background-color: unset;
+   border-bottom: solid #545149;
+   margin: .25em;
+   padding: .25em;
+ }
+
+ .tweetform{
+   width: 100%;
+   align-content: center;
+   flex-direction: column;
+ }
+
+ ::placeholder{
+   font-weight: 700;
+   font-size: 80%;
+ }
+
+ form{
+   display: flex
+  }
+
+  .counter{
+    justify-self: flex-end;
+    font-weight: 700;
+  }
+
+  .submission{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  :focus{
+    outline: unset;
+  }
