@@ -13,9 +13,10 @@
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/client.js"></script>
+    <script src="scripts/composer-char-counter.js"></script>
   </head>
 
   <body>
@@ -23,7 +24,7 @@
     <nav>
       <span>tweeter</span>
     </nav>
-    <header>
+    <header class="top">
       <div>
           <img src="/images/profile-hex.png"> 
       </div>
@@ -38,13 +39,36 @@
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form class="tweetform" method="POST" action="/tweets">
-          <input class="tweet-text" name="text" id="tweet-text" placeholder="What are you humming about?"></input>
+          <textarea rows="1" col name="text" class="tweet-text" placeholder="What are you humming about?"></textarea>
           <div class="submission">
             <button class="button" type="submit">Tweet</button>
-            <output name="counter" class="counter" for="tweet-text">140</output>
+            <output name="counter" class="counter" for="tweet-text" id="counter">140</output>
           </div>
         </form>
       </section>
+      <section>
+        <article class="tweet">
+          <header>
+            <img src="images/profile-hex.png"><p>Rhoda Jacobs</p><span class="handle">@MrsJacob</span>
+          </header>
+          <p>Hello world</p>
+          <footer>10 days ago</footer>
+        </article>
+        <article class="tweet">
+          <header>
+            <img src="images/profile-hex.png"><p>Rhoda Jacobs</p><span class="handle">@MrsJacob</span>
+          </header>
+          <p>Hello world</p>
+          <footer>10 days ago</footer>
+        </article>
+        <article class="tweet">
+          <header>
+            <img src="images/profile-hex.png"><p>Rhoda Jacobs</p><span class="handle">@MrsJacob</span>
+          </header>
+          <p>Hello world</p>
+          <footer>10 days ago</footer>
+        </article>
+    </section>
     </main>
   </body>
 </html>
