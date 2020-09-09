@@ -40,7 +40,13 @@ width: 2.5em;
 color: #ffffff;
 font-size: 150%;
 font-weight: 600;
+border: solid #545149;
 background-color: #00bf9f;
 background-image: url("https://www.transparenttextures.com/patterns/dark-leather.png");
 border-radius: 50%;
+}
+
+.back-to-top:hover{
+  background-color: #ff4060;
+  color: #000000;
 }

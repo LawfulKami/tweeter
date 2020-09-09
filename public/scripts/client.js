@@ -45,7 +45,7 @@ $(document).ready(function() {
   const toggle = document.getElementsByClassName("toggle");
   const backToTop = document.getElementsByClassName("back-to-top");
   const errMsg = document.getElementsByClassName("error-msg");
-  
+
   
   const loadsTweets = () => {
     $.ajax({
@@ -57,6 +57,7 @@ $(document).ready(function() {
 
   loadsTweets();
   $(errMsg).hide();
+  $(backToTop).hide();
   
   
 
@@ -102,23 +103,27 @@ $(document).ready(function() {
   });
 
 
-  ///Write new tweet buttons
-  // $(newTweet).hide();
-  $(backToTop).hide();
-
   $(toggle).on("click", function(event) {
     $(newTweet).toggle("slow");
   });
 
-  $(window).scroll(function(event) {
-    console.log("Im here");
-    $(backToTop).show();
-    $(newTweet).hide();
-  });
 
   $(backToTop).on("click", function(event) {
     $(window).scrollTop(0);
     $(backToTop).hide();
     $(newTweet).show();
+
+  });
+
+
+  window.addEventListener("scroll", () => {
+    let currentPos = window.scrollY;
+    if (currentPos > 400) {
+      $(backToTop).show();
+      $(toggle).hide();
+    } else {
+      $(backToTop).hide();
+      $(toggle).show()
+    }
   });
 });
