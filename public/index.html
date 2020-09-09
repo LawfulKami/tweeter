@@ -38,13 +38,17 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
-        <form class="tweetform" method="POST" action="/tweets">
+        <form class="tweetform" name="postedTweet" method="POST" action="/tweets">
           <textarea rows="1" col name="text" class="tweet-text" placeholder="What are you humming about?"></textarea>
           <div class="submission">
             <button class="button" id="tweet-btn" type="submit">Tweet</button>
             <output name="counter" class="counter" for="tweet-text" id="counter">140</output>
           </div>
         </form>
+        <div class="error-msg">
+          <img class="error-image" src="./images/warning.png">
+          <div class= "error-txt"></div>
+        </div>
       </section>
       <section id="tweets-container"></section>
     </main>

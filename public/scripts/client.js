@@ -1,62 +1,26 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /*
  * Client-side JS logic goes here
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-];
+
 
 const renderTweets = function(tweets) {
+  const feed = tweets.reverse();
   let render = "";
   for (const tweet of tweets) {
     render += createTweetElement(tweet);
   }
   return render;
+};
+
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
 };
 
 const createTweetElement = function(tweet) {
@@ -66,7 +30,7 @@ const createTweetElement = function(tweet) {
   <header>
   <img class="small-avatar" src="${avatars}"><p>${name}</p><span class="handle">${handle}</span>
   </header>
-  <p>${text}</p>
+  <p>${escape(text)}</p>
   <footer>10 days ago</footer>
   </article>`;
   return $tweet;
@@ -76,21 +40,30 @@ $(document).ready(function() {
   const tweetsSection = document.getElementById("tweets-container");
   const tweet = document.getElementsByClassName("tweet");
   const textBox = document.getElementsByClassName("tweet-text");
-  const submission = document.getElementsByClassName("tweet-btn");
+  const submission = document.getElementsByClassName("tweetform");
   const newTweet = document.getElementsByClassName("new-tweet");
   const toggle = document.getElementsByClassName("toggle");
   const backToTop = document.getElementsByClassName("back-to-top");
+  const errMsg = document.getElementsByClassName("error-msg");
   
-  ////Dynamically create tweet feed
-  tweetsSection.innerHTML = renderTweets(data);
+  
+  const loadsTweets = () => {
+    $.ajax({
+      url: "/tweets"
+    }).then(data => {
+      tweetsSection.innerHTML = renderTweets(data);
+    });
+  };
+
+  loadsTweets();
+  $(errMsg).hide();
+  
+  
 
   ///Expands writing box on focus
   $(textBox).on("focus", function(event) {
     $(textBox).attr("rows", 3);
   });
-  // $(textBox).on("blur", function(event) {
-  //   $(textBox).attr("rows", 1);
-  // });
 
   ///Highlights moused over tweets in the feed
   $(tweet).on("mouseover", function(event) {
@@ -105,21 +78,40 @@ $(document).ready(function() {
 
   ///Submits Tweets
   $(submission).submit(function(event) {
-    console.log("running");
-    // event.peventDefault();
-    console.log(event);
+    event.preventDefault();
+    const errMessage = $(this).parent().find(".error-msg");
+    const errText = $(this).parent().find(".error-txt")[0];
+    if (!submission[0].text.value) {
+      $(errMessage).show("fast");
+      errText.innerText = "Your Tweet is empty!";
+    } else if (submission[0].text.value.length > 140) {
+      $(errMessage).show("fast");
+      errText.innerText = "Your Tweet is to Long!";
+    } else {
+      $(errMessage).hide("fast");
+      $.ajax("/tweets", {
+        type: "POST",
+        data: $(submission).serialize()
+      }).then(() => {
+        loadsTweets();
+      });
+      $(textBox).attr("rows", 1);
+      $(textBox).val("");
+      $(newTweet).hide("slow");
+    }
   });
 
 
   ///Write new tweet buttons
-  $(newTweet).hide();
+  // $(newTweet).hide();
   $(backToTop).hide();
 
   $(toggle).on("click", function(event) {
     $(newTweet).toggle("slow");
   });
 
-  $(window).scroll(function() {
+  $(window).scroll(function(event) {
+    console.log("Im here");
     $(backToTop).show();
     $(newTweet).hide();
   });

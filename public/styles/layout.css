@@ -5,6 +5,7 @@
  */
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -49,8 +50,9 @@ main{
 }
 
 .new-tweet{
+  display: none;
   width: 100%;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-content: center;
   align-items: center;
@@ -159,3 +161,30 @@ form.tweetform{
 .visible{
   visibility: visible;
 }
+
+.error-msg {
+  display: flex;
+  align-items: center;
+  height:4em;
+  width: 15em;
+  padding: .25em 1em .25em 1em;
+  position: absolute;
+  background-color: #911d00;
+  background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
+  border-radius: 50%;
+  border: solid #545149;
+}
+
+.error-txt{
+  color: #f4f1ec;
+  margin-left: 1em;
+  font-family: bungee;
+  font-size: 80%
+}
+
+.error-image{
+  object-fit: scale-down;
+  width: 2em;
+}
+
+
