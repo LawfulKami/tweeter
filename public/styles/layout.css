@@ -25,137 +25,137 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
- header.top{
-   display: flex;
-   flex-direction: column;
-   color: #FFFFFF;
-   height: 400px;
-   padding: 30px;
-   width: auto;
-   align-items: center;
-   background-color: #00276b;
-   background-image: url("https://www.transparenttextures.com/patterns/binding-light.png");
- }
+header.top{
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  height: 400px;
+  padding: 30px;
+  width: auto;
+  align-items: center;
+  background-color: #00276b;
+  background-image: url("https://www.transparenttextures.com/patterns/binding-light.png");
+}
 
- header.top h2{
+header.top h2{
+ margin: .25em;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 10% 20px 10%;
+  justify-content: center;
+}
+
+.new-tweet{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.button{
+  font-family: Bungee;
+  background-color: #4056A1;
+  color: #FFFFFF;
   margin: .25em;
- }
+}
 
- main{
-   display: flex;
-   flex-direction: column;
-   margin: 20px 10% 20px 10%;
-   justify-content: center;
- }
+.tweet-text{
+  display: flex;
+  border: unset;
+  background-color: unset;
+  border-bottom: solid #545149;
+  margin: .25em;
+  padding: .25em;
+  resize: none;
+}
 
- .new-tweet{
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   align-content: center;
-   align-items: center;
- }
+.tweetform{
+  width: 100%;
+  align-content: center;
+  flex-direction: column;
+}
 
- .button{
-   font-family: Bungee;
-   background-color: #4056A1;
-   color: #FFFFFF;
-   margin: .25em;
- }
+::placeholder{
+  font-weight: 700;
+  font-size: 80%;
+}
 
- .tweet-text{
-   display: flex;
-   border: unset;
-   background-color: unset;
-   border-bottom: solid #545149;
-   margin: .25em;
-   padding: .25em;
- }
+form.tweetform{
+  display: flex
+}
 
- .tweetform{
-   width: 100%;
-   align-content: center;
-   flex-direction: column;
- }
+.counter{
+  justify-self: flex-end;
+  font-weight: 700;
+  font-family: Bungee;
+}
 
- ::placeholder{
-   font-weight: 700;
-   font-size: 80%;
- }
+.submission{
+  display: flex;
+  justify-content: space-between;
+}
 
- form.tweetform{
-   display: flex
-  }
+:focus {
+  outline: unset;
+}
 
-  .counter{
-    justify-self: flex-end;
-    font-weight: 700;
-    font-family: Bungee;
-  }
+.tweet {
+  display: flex;
+  flex-direction: column;
+  border: solid #545149;
+  margin: 1em 0em;
+  padding: .25em .25em;
+}
 
-  .submission{
-    display: flex;
-    justify-content: space-between;
-  }
+.tweet header {
+  display: flex;
+  align-items: center;
+}
 
-  :focus {
-    outline: unset;
-  }
+.tweet header p {
+  font-size: 90%;
+  margin-left: .5em;
+}
 
-  article {
-    display: flex;
-    flex-direction: column;
-    border: solid #545149;
-    margin: 1em 0em;
-    padding: .25em .25em;
-  }
+.tweet header span {
+  justify-self: flex-end;
+  margin-left: auto;
+  font-size: 80%;
+  font-weight: 700;
+  color: lightslategray;
+  align-self: flex-start;
+  padding: .5em .25em;
+}
 
-  article header {
-    display: flex;
-    align-items: center;
+.tweet img {
+  height: 100%;
+  width: 10%;
+}
 
-  }
+.tweet > p {
+  border-bottom: solid #545149;
+  margin: unset;
+  padding: 1em;
+}
+.tweet footer {
+  font-size: 60%;
+  padding: .5em;
+  font-weight: 500
+}
 
-  article header p {
-    font-size: 90%;
-  }
+.tweet:hover {
+  box-shadow: .60em .40em .1em lightslategray;
+  font-weight: 600;
+}
 
-  article header span {
-    justify-self: flex-end;
-    margin-left: auto;
-    font-size: 80%;
-    font-weight: 700;
-    color: lightslategray;
-    align-self: flex-start;
-    padding: .5em .25em;
-  }
+.handle{
+  visibility: hidden;
+}
 
-  article img {
-    height: 100%;
-    width: 10%;
-  }
-
-  article > p {
-    border-bottom: solid #545149;
-    margin: unset;
-    padding: 1em;
-  }
-
-  article footer {
-    font-size: 60%;
-    padding: .5em;
-    font-weight: 500
-  }
-
-  .tweet:hover {
-    box-shadow: .60em .40em .1em lightslategray;
-    font-weight: 600;
-  }
-
-  .handle{
-    visibility: hidden;
-  }
-
-  .visible{
-    visibility: visible;
-  }
+.visible{
+  visibility: visible;
+}
