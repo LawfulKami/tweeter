@@ -9,6 +9,7 @@ nav{
   color: #FFFFFF;
   padding: 1.5em;
   font-size: larger;
+  z-index: 1;
 }
 
 nav .logo {

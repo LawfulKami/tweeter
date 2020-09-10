@@ -50,9 +50,8 @@ main{
 }
 
 .new-tweet{
-  display: none;
   width: 100%;
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
@@ -144,21 +143,34 @@ form.tweetform{
   padding: 1em;
 }
 .tweet footer {
+  display: flex;
+  justify-content: space-between;
   font-size: 60%;
   padding: .5em;
   font-weight: 500
 }
+
+.icon {
+  border : unset;
+  background-color: #f4f1ec;
+  border-radius: 50%;
+}
+
+.icon:hover{
+  background-color: #7f99e7;
+}
+
 
 .tweet:hover {
   box-shadow: .60em .40em .1em lightslategray;
   font-weight: 600;
 }
 
-.handle{
+.handle {
   visibility: hidden;
 }
 
-.visible{
+.visible {
   visibility: visible;
 }
 
@@ -169,10 +181,19 @@ form.tweetform{
   width: 15em;
   padding: .25em 1em .25em 1em;
   position: absolute;
+  left: 3em;
+  top: 18em;
   background-color: #911d00;
   background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
   border-radius: 50%;
   border: solid #545149;
+  box-shadow: .30em .20em .20em lightslategray;
+  animation: 1s infinite alternate pulsing;
+}
+
+@keyframes pulsing {
+  from { transform: scale(1); }
+  to   { transform: scale(0.9); }
 }
 
 .error-txt{
