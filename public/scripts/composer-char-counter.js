@@ -1,19 +1,17 @@
 
 $(document).ready(function() {
-  const textBox = document.getElementsByClassName("tweet-text");
-  const submission = document.getElementsByClassName("tweetform");
   
-  $(textBox).on("keyup", function(event) {
-    const counter = $(this).parent().find("output")[0];
+  $(".tweet-text").on("keyup", function(event) {
+    const counter = $(this).parent().find("output")[0];///trouve method + direct
     const remChar = 140 - (this.value.length);
-    counter.innerText = remChar;
+    $(counter).text(remChar);
     
-    remChar < 0 ? $(counter).css("color", "red") : $(counter).css("color", "#545149");
+    remChar < 0 ? $(counter).addClass("warning") : $(counter).removeClass("warning");
   });
 
-  $(submission).submit(function(event) {
+  $(".tweetform").submit(function(event) {
     const counter = $(this).find("output")[0];
-    counter.innerText = 140;
+    $(counter).text(140);
   });
 });
 

@@ -1,13 +1,17 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
 
 
+///Text Escape function
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
 
+
+///// Generates Feed //////
 const renderTweets = function(tweets) {
   const feed = tweets.reverse();
   let render = "";
@@ -17,22 +21,17 @@ const renderTweets = function(tweets) {
   return render;
 };
 
-const escape =  function(str) {
-  let div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
-
 const createTweetElement = function(tweet) {
   const { name, avatars, handle } = tweet.user;
   const { text } = tweet.content;
-  let $tweet = `<article class="tweet"> 
+  const { created_at } = tweet;
+  let newtweet = `<article class="tweet"> 
   <header>
   <img class="small-avatar" src="${avatars}"><p>${name}</p><span class="handle">${handle}</span>
   </header>
   <p>${escape(text)}</p>
   <footer class="tweetfooter">
-  <span>10 days ago</span>
+  <span>${moment(created_at).fromNow()}</span>
   <div>
   <button class="icon flag"><svg class="actions" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></button>
   <button class="icon retweet"><svg class="actions" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-repeat"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></button>
@@ -40,95 +39,102 @@ const createTweetElement = function(tweet) {
   </div>
   </footer>
   </article>`;
-  return $tweet;
+  return newtweet;
 };
 
-$(document).ready(function() {
-  const tweetsSection = document.getElementById("tweets-container");
-  const tweet = document.getElementsByClassName("tweet");
-  const textBox = document.getElementsByClassName("tweet-text");
-  const submission = document.getElementsByClassName("tweetform");
-  const newTweet = document.getElementsByClassName("new-tweet");
-  const toggle = document.getElementsByClassName("toggle");
-  const backToTop = document.getElementsByClassName("back-to-top");
-  const errMsg = document.getElementsByClassName("error-msg");
+const loadsTweets = () => {
+  $.ajax({
+    url: "/tweets"
+  }).then(data => {
+    $("#tweets-container").html(renderTweets(data));
+  }).catch(err =>{
+    console.log(err);
+  });
+};
 
-  
-  const loadsTweets = () => {
-    $.ajax({
-      url: "/tweets"
-    }).then(data => {
-      tweetsSection.innerHTML = renderTweets(data);
-    });
-  };
+const valUserInput = function(formSub) {
+  const errText = $(".error-txt");
+  if (!$(formSub).find("textarea").val()) {
+    $(".error-txt").text("Your Tweet is empty!");
+    return false;
+  }
+  if ($(formSub).find("textarea").val().length > 140) {
+    $(".error-txt").text("Your Tweet is to Long!");
+    return false;
+  } else {
+    return true;
+  }
+};
+
+
+$(document).ready(function() {
 
   loadsTweets();
-  $(errMsg).hide();
-  $(backToTop).hide();
+  $(".error-msg").hide();//display none?
+  $(".back-to-top").hide();//display none?
   
   
 
   ///Expands writing box on focus
-  $(textBox).on("focus", function(event) {
-    $(textBox).attr("rows", 3);
+  $(".tweet-text").on("focus", function(event) {
+    $(".tweet-text").attr("rows", 3);
   });
 
   ///Highlights moused over tweets in the feed
-  $(tweet).on("mouseover", function(event) {
+  $(".tweet").on("mouseover", function(event) {
     const handle = $(this).find(".handle");
     $(handle).addClass("visible");
   });
 
-  $(tweet).on("mouseout", function(event) {
+  $(".tweet").on("mouseout", function(event) {
     const handle = $(this).find(".handle");
     $(handle).removeClass("visible");
   });
 
   ///Submits Tweets
-  $(submission).submit(function(event) {
+  $(".tweetform").submit(function(event) {
     event.preventDefault();
     const errMessage = $(this).parent().find(".error-msg");
-    const errText = $(this).parent().find(".error-txt")[0];
-    if (!submission[0].text.value) {
+    
+    if (!valUserInput($(".tweetform")[0])) {
       $(errMessage).show();
-      errText.innerText = "Your Tweet is empty!";
-    } else if (submission[0].text.value.length > 140) {
-      $(errMessage).show();
-      errText.innerText = "Your Tweet is to Long!";
+
     } else {
       $(errMessage).hide("fast");
       $.ajax("/tweets", {
         type: "POST",
-        data: $(submission).serialize()
-      }).then(() => {
-        loadsTweets();
-      });
-      $(textBox).attr("rows", 1);
-      $(textBox).val("");
+        data: $(".tweetform").serialize()
+      }).then((ntweet) => {
+        $("#tweets-container").prepend(createTweetElement(ntweet));
+      }).catch((err => {
+        console.log(err);
+      }));
+      $(".tweet-text").attr("rows", 1);
+      $(".tweet-text").val("");
     }
   });
 
 
-  $(toggle).on("click", function(event) {
-    $(newTweet).toggle("slow");
+  $(".toggle").on("click", function(event) {
+    $(".new-tweet").toggle("slow");
   });
 
 
-  $(backToTop).on("click", function(event) {
+  $(".back-to-top").on("click", function(event) {
     $(window).scrollTop(0);
-    $(backToTop).hide();
-    $(newTweet).show();
+    $(".back-to-top").hide();
+    $(".new-tweet").show();
   });
 
 
-  window.addEventListener("scroll", () => {
+  $(window).on("scroll", () => {
     let currentPos = window.scrollY;
     if (currentPos > 400) {
-      $(backToTop).show();
-      $(toggle).hide();
+      $(".back-to-top").show();
+      $(".write-panel").hide();
     } else {
-      $(backToTop).hide();
-      $(toggle).show();
+      $(".back-to-top").hide();
+      $(".write-panel").show();
     }
   });
 });

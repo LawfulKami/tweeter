@@ -17,16 +17,31 @@ nav .logo {
   font-size: 120%;
 }
 
-nav .toggle {
+.write-lg {
   color: #FFFFFF;
   font-size: 80%;
   background-color: #4056A1;
   border: unset;
-  padding: .25em 1em 1.5em 1em;
+  padding: .25em 1em .25em 1em;
   border-radius: 30px;
 }
 
-nav .toggle:hover {
+.write-lg:hover {
+  background-color: #8fb0f6;
+  color:#1d284d;
+}
+
+.write-sm {
+  display: none;
+  color: #FFFFFF;
+  font-size: 80%;
+  background-color: #4056A1;
+  border: unset;
+  padding: .25em 1em .25em 1em;
+  border-radius: 30px;
+}
+
+.write-sm:hover {
   background-color: #8fb0f6;
   color:#1d284d;
 }
@@ -34,10 +49,10 @@ nav .toggle:hover {
 .back-to-top {
 position: fixed;
 justify-self: right;
-bottom: 60px;
-right: 60px;
-height: 2.5em;
-width: 2.5em;
+bottom: 2.5%;
+right: 5%;
+height: 70px;
+width: 70px;
 color: #ffffff;
 font-size: 150%;
 font-weight: 600;
@@ -50,4 +65,14 @@ border-radius: 50%;
 .back-to-top:hover{
   background-color: #ff4060;
   color: #000000;
+}
+
+@media screen and (max-width: 600px) {
+  .write-lg{
+    display: none;
+  }
+  .write-sm {
+    display: block;
+    font-weight: bold;
+  }
 }

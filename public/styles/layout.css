@@ -16,6 +16,8 @@ html {
  */
 
 body {
+  display: flex;
+  flex-direction: column;
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
@@ -208,4 +210,32 @@ form.tweetform{
   width: 2em;
 }
 
+.super-container{
+  margin: unset;
+  display: flex;
+  flex-direction: column;
+}
 
+@media screen and (min-width: 1024px) {
+  .super-container {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .top{
+    flex: 2 1 40%;
+    margin: 3rem 2em;
+    
+  }
+  .container {
+    margin: 3rem 2em;
+    flex: 2 1 60%;
+  }
+  .error-msg {
+    top: 15%;
+    left: 20%;
+  }
+}
+
+.warning {
+  color: red;
+}
