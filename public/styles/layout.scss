@@ -7,7 +7,6 @@ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -15,19 +14,27 @@ html {
 /*
  * Global layout stuff
  */
+
+$pageBackground: #f4f1ec;
+$font-stack-brand: Bungee, sans-serif;
+$font-stack-usage: 'Source Sans Pro', sans-serif;
+$main-writing-color: #545149;
+$border: solid #545149;
+
 body {
   display: flex;
   flex-direction: column;
-  color: #545149;
-  background-color: #f4f1ec;
+  color: $main-writing-color;
+  background-color: $pageBackground;
   font-size: 24px;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: $font-stack-usage;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
-header.top {
+
+header.top{
   display: flex;
   flex-direction: column;
   color: #FFFFFF;
@@ -37,19 +44,20 @@ header.top {
   align-items: center;
   background-color: #00276b;
   background-image: url("https://www.transparenttextures.com/patterns/binding-light.png");
-}
-header.top h2 {
-  margin: 0.25em;
+  h2{
+    margin: .25em;
+  }
 }
 
-main {
+
+main{
   display: flex;
   flex-direction: column;
   margin: 20px 10% 20px 10%;
   justify-content: center;
 }
 
-.new-tweet {
+.new-tweet{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -57,41 +65,41 @@ main {
   align-items: center;
 }
 
-.button {
-  font-family: Bungee, sans-serif;
+.button{
+  font-family: $font-stack-brand;
   background-color: #4056A1;
   color: #FFFFFF;
-  margin: 0.25em;
+  margin: .25em;
 }
 
-.tweet-text {
+.tweet-text{
   display: flex;
   border: unset;
   background-color: unset;
-  border-bottom: solid #545149;
-  margin: 0.25em;
-  padding: 0.25em;
+  border-bottom: $border;
+  margin: .25em;
+  padding: .25em;
   resize: none;
 }
 
-.tweetform {
+.tweetform{
   display: flex;
   width: 100%;
   align-content: center;
   flex-direction: column;
-}
-.tweetform ::placeholder {
-  font-weight: 700;
-  font-size: 80%;
-}
+  ::placeholder{
+    font-weight: 700;
+    font-size: 80%;
+  }
+};
 
-.counter {
+.counter{
   justify-self: flex-end;
   font-weight: 700;
-  font-family: Bungee, sans-serif;
+  font-family: $font-stack-brand;
 }
 
-.submission {
+.submission{
   display: flex;
   justify-content: space-between;
 }
@@ -103,64 +111,67 @@ main {
 .tweet {
   display: flex;
   flex-direction: column;
-  border: solid #545149;
+  border: $border;
   margin: 1em 0em;
-  padding: 0.25em;
-}
-.tweet header {
-  display: flex;
-  align-items: center;
-}
-.tweet header p {
-  font-size: 90%;
-  margin-left: 0.5em;
-}
-.tweet header span {
-  justify-self: flex-end;
-  margin-left: auto;
-  font-size: 80%;
-  font-weight: 700;
-  color: lightslategray;
-  align-self: flex-start;
-  padding: 0.5em 0.25em;
-}
-.tweet img {
-  height: 100%;
-  width: 10%;
-}
-.tweet footer {
-  display: flex;
-  justify-content: space-between;
-  font-size: 60%;
-  padding: 0.5em;
-  font-weight: 500;
-}
-.tweet:hover {
-  box-shadow: 0.6em 0.4em 0.1em lightslategray;
-  font-weight: 600;
-}
-.tweet:hover .icon {
-  visibility: visible;
-}
-.tweet:hover .handle {
-  visibility: visible;
+  padding: .25em;
+  header {
+    display: flex;
+    align-items: center;
+    p {
+      font-size: 90%;
+      margin-left: .5em;
+    }
+    span {
+      justify-self: flex-end;
+      margin-left: auto;
+      font-size: 80%;
+      font-weight: 700;
+      color: lightslategray;
+      align-self: flex-start;
+      padding: .5em .25em;
+    }
+  }
+  img {
+    height: 100%;
+    width: 10%;
+  }
+  
+  footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 60%;
+    padding: .5em;
+    font-weight: 500
+  }
+  &:hover {
+    box-shadow: .60em .40em .1em lightslategray;
+    font-weight: 600;
+    .icon{
+      visibility: visible;
+    }
+    .handle{
+      visibility: visible;
+    }
+  }
+  
 }
 
 .content {
-  border-bottom: solid #545149;
+  border-bottom: $border;
   margin: unset;
   padding: 1em;
 }
 
 .icon {
   visibility: hidden;
-  border: unset;
-  background-color: #f4f1ec;
+  border : unset;
+  background-color: $pageBackground;
   border-radius: 50%;
+  &:hover{
+    background-color: #7f99e7;
+  }
 }
-.icon:hover {
-  background-color: #7f99e7;
-}
+
 
 .handle {
   visibility: hidden;
@@ -173,41 +184,38 @@ main {
 .error-msg {
   display: flex;
   align-items: center;
-  height: 4em;
+  height:4em;
   width: 15em;
-  padding: 0.25em 1em;
+  padding: .25em 1em;
   position: absolute;
   left: 3em;
   top: 18em;
   background-color: #911d00;
   background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
   border-radius: 50%;
-  border: solid #545149;
-  box-shadow: 0.3em 0.2em 0.2em lightslategray;
+  border: $border;
+  box-shadow: .30em .20em .20em lightslategray;
   animation: 1s infinite alternate pulsing;
 }
 
 @keyframes pulsing {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0.9);
-  }
-}
-.error-txt {
-  color: #f4f1ec;
-  margin-left: 1em;
-  font-family: Bungee, sans-serif;
-  font-size: 80%;
+  from { transform: scale(1); }
+  to   { transform: scale(0.9); }
 }
 
-.error-image {
+.error-txt{
+  color: #f4f1ec;
+  margin-left: 1em;
+  font-family: $font-stack-brand;
+  font-size: 80%
+}
+
+.error-image{
   object-fit: scale-down;
   width: 2em;
 }
 
-.super-container {
+.super-container{
   margin: unset;
   display: flex;
   flex-direction: column;
@@ -218,24 +226,21 @@ main {
     flex-direction: row;
     justify-content: space-evenly;
   }
-
-  .top {
+  .top{
     flex: 2 1 40%;
     margin: 3rem 2em;
+    
   }
-
   .container {
     margin: 3rem 2em;
     flex: 2 1 60%;
   }
-
   .error-msg {
     top: 15%;
     left: 20%;
   }
 }
+
 .warning {
   color: red;
 }
-
-/*# sourceMappingURL=layout.css.map */

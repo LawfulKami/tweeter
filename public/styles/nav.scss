@@ -1,4 +1,4 @@
-nav {
+nav{
   position: sticky;
   top: 0px;
   display: flex;
@@ -10,24 +10,29 @@ nav {
   padding: 1.5em;
   font-size: larger;
   z-index: 1;
+
+  .logo {
+    font-family: Bungee;
+    font-size: 120%;
+  }
 }
-nav .logo {
-  font-family: Bungee;
-  font-size: 120%;
-}
+
+
 
 .write-lg {
   color: #FFFFFF;
   font-size: 80%;
   background-color: #4056A1;
   border: unset;
-  padding: 0.25em 1em 0.25em 1em;
+  padding: .25em 1em .25em 1em;
   border-radius: 30px;
+
+  &:hover {
+    background-color: #8fb0f6;
+    color:#1d284d;
+  }
 }
-.write-lg:hover {
-  background-color: #8fb0f6;
-  color: #1d284d;
-}
+
 
 .write-sm {
   display: none;
@@ -35,13 +40,15 @@ nav .logo {
   font-size: 80%;
   background-color: #4056A1;
   border: unset;
-  padding: 0.25em 1em 0.25em 1em;
+  padding: .25em 1em .25em 1em;
   border-radius: 30px;
+
+  &:hover {
+    background-color: #8fb0f6;
+    color:#1d284d;
+  }
 }
-.write-sm:hover {
-  background-color: #8fb0f6;
-  color: #1d284d;
-}
+
 
 .back-to-top {
   position: fixed;
@@ -57,21 +64,20 @@ nav .logo {
   background-color: #00bf9f;
   background-image: url("https://www.transparenttextures.com/patterns/dark-leather.png");
   border-radius: 50%;
+  
+  &:hover{
+    background-color: #ff4060;
+    color: #000000;
+  }
 }
-.back-to-top:hover {
-  background-color: #ff4060;
-  color: #000000;
-}
+
 
 @media screen and (max-width: 600px) {
-  .write-lg {
+  .write-lg{
     display: none;
   }
-
   .write-sm {
     display: block;
     font-weight: bold;
   }
 }
-
-/*# sourceMappingURL=nav.css.map */

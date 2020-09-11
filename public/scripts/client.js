@@ -1,7 +1,3 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-
 
 ///Text Escape function
 const escape =  function(str) {
@@ -29,7 +25,7 @@ const createTweetElement = function(tweet) {
   <header>
   <img class="small-avatar" src="${avatars}"><p>${name}</p><span class="handle">${handle}</span>
   </header>
-  <p>${escape(text)}</p>
+  <p class="content">${escape(text)}</p>
   <footer class="tweetfooter">
   <span>${moment(created_at).fromNow()}</span>
   <div>
@@ -45,11 +41,13 @@ const createTweetElement = function(tweet) {
 const loadsTweets = () => {
   $.ajax({
     url: "/tweets"
+
   }).then(data => {
     $("#tweets-container").html(renderTweets(data));
-  }).catch(err =>{
-    console.log(err);
-  });
+  })
+    .catch(err =>{
+      console.log(err);
+    });
 };
 
 const valUserInput = function(formSub) {
@@ -67,29 +65,23 @@ const valUserInput = function(formSub) {
 };
 
 
+////////////
+//On -Load//
+////////////
+
 $(document).ready(function() {
 
   loadsTweets();
+
   $(".error-msg").hide();//display none?
   $(".back-to-top").hide();//display none?
-  
-  
+
 
   ///Expands writing box on focus
   $(".tweet-text").on("focus", function(event) {
     $(".tweet-text").attr("rows", 3);
   });
 
-  ///Highlights moused over tweets in the feed
-  $(".tweet").on("mouseover", function(event) {
-    const handle = $(this).find(".handle");
-    $(handle).addClass("visible");
-  });
-
-  $(".tweet").on("mouseout", function(event) {
-    const handle = $(this).find(".handle");
-    $(handle).removeClass("visible");
-  });
 
   ///Submits Tweets
   $(".tweetform").submit(function(event) {
@@ -104,29 +96,32 @@ $(document).ready(function() {
       $.ajax("/tweets", {
         type: "POST",
         data: $(".tweetform").serialize()
+
       }).then((ntweet) => {
         $("#tweets-container").prepend(createTweetElement(ntweet));
+
       }).catch((err => {
         console.log(err);
+
       }));
       $(".tweet-text").attr("rows", 1);
       $(".tweet-text").val("");
     }
   });
 
-
+  ///Toggle write tweet box
   $(".toggle").on("click", function(event) {
-    $(".new-tweet").toggle("slow");
+    $("#new-tweet").toggle(500, () => $(".tweet-text").focus());
   });
 
 
   $(".back-to-top").on("click", function(event) {
     $(window).scrollTop(0);
     $(".back-to-top").hide();
-    $(".new-tweet").show();
+    $("#new-tweet").show(500, () => $(".tweet-text").focus());
   });
 
-
+  
   $(window).on("scroll", () => {
     let currentPos = window.scrollY;
     if (currentPos > 400) {
